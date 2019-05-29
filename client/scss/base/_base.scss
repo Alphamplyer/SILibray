@@ -1,0 +1,35 @@
+p, a, h1, h2, h3, h4, h5, h6, td, th, label, input, button {
+    color: $foreground_color;
+    font-family: 'Rambla', sans-serif;
+}
+
+body, html, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: $main_background_color;
+}
+
+a {
+    color: $foreground_color_link;
+    text-decoration: none;
+
+    &:hover {
+        color: $foreground_color_link_hover;
+        text-decoration: underline;
+    }
+}
+
+a, p, button, td, th input {
+    font-size: 16px;
+}
+
+button, a {
+    font-weight: 600;
+}
+
+td a {
+    font-weight: normal;
+}

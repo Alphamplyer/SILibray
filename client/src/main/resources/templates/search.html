@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush|Rambla:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>Recherche</title>
+</head>
+<body>
+<div th:replace="menu :: menu"></div>
+<div class="l-container">
+
+    <th:block th:if="${result_found > 0}">
+        <th:block th:if="${authors != null}">
+            <h1>Auteurs</h1>
+            <p th:text="'Nous avons trouvé ' + ${author_result} + ' auteur(s) pour votre recherche !'"></p>
+            <table class="large_table">
+                <tr>
+                    <th>Nom</th>
+                    <th>Date de Naissance</th>
+                    <th>Date de Mort</th>
+                </tr>
+                <th:block th:each="author: ${authors}">
+                    <tr>
+                        <td><a th:href="@{'/authors/'+${author.id}}" th:text="${author.name}"></a></td>
+                        <td th:text="${#dates.format(author.birthDate, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${#dates.format(author.deathDate, 'dd/MM/yyyy')}"></td>
+                    </tr>
+                </th:block>
+            </table>
+        </th:block>
+
+        <th:block th:if="${books != null}">
+            <h1>Livres</h1>
+            <p th:text="'Nous avons trouvé ' + ${book_result} + ' livre(s) pour votre recherche !'"></p>
+            <table class="large_table">
+                <tr>
+                    <th>Nom</th>
+                    <th>Date de Parution</th>
+                    <th>Référence</th>
+                    <th>Statut</th>
+                </tr>
+                <th:block th:each="book: ${books}">
+                    <tr>
+                        <td><a th:href="@{/books/}+${book.id}" th:text="${book.name}"></a></td>
+                        <td th:text="${#dates.format(book.releaseDate, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${book.bookReference}"></td>
+                        <td th:if="${book.available}" class="book_available green">Disponible</td>
+                        <td th:unless="${book.available}" class="book_no_available red">Indisponible</td>
+                    </tr>
+                </th:block>
+            </table>
+        </th:block>
+    </th:block>
+    <th:block th:unless="${result_found > 0}">
+        <div class="error_message">
+            <p>Nous n'avons trouvé aucun résultat pour votre recherche !</p>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

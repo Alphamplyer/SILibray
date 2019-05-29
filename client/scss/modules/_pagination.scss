@@ -1,0 +1,48 @@
+.pagination {
+
+    margin: 20px auto;
+    width: 170px;
+    height: 30px;
+    position: relative;
+
+
+    .page_button {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        background-color: $main_color;
+        color: $foreground_color_link;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 15px;
+        margin: 0;
+        position: absolute;
+
+        &:hover {
+            background-color: $main_color_hover;
+            color: $foreground_color_link_hover;
+        }
+
+        &.min_page {
+            left: 0px;
+        }
+
+        &.prev_page {
+            left: 35px;
+        }
+
+        &.current_page {
+            left: 70px;
+            right: 70px;
+        }
+
+        &.next_page {
+            right: 35px;
+        }
+
+        &.max_page {
+            right: 0px;
+        }
+    }
+}

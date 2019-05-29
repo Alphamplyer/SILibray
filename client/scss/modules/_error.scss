@@ -1,0 +1,11 @@
+.error_message {
+    margin: 30px auto;
+    padding: 7px 10px;
+    background-color: $background_error_color;
+    border: 1px solid $boder_error_color;
+    border-radius: 5px;
+
+    p {
+        color: $foreground_error_div_color;
+    }
+}

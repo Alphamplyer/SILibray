@@ -1,0 +1,4 @@
+INSERT INTO public.loans (id, user_id, book_id, begin_date, end_date, is_extended, is_archived) VALUES (1, 1, 1, '2019-05-12', '2019-05-13', true, false);
+INSERT INTO public.loans (id, user_id, book_id, begin_date, end_date, is_extended, is_archived) VALUES (2, 1, 2, '2019-05-14', '2019-07-09', true, false);
+INSERT INTO public.loans (id, user_id, book_id, begin_date, end_date, is_extended, is_archived) VALUES (4, 1, 13, '2019-05-15', '2019-06-12', false, false);
+INSERT INTO public.loans (id, user_id, book_id, begin_date, end_date, is_extended, is_archived) VALUES (3, 1, 3, '2019-05-14', '2019-07-09', true, false);

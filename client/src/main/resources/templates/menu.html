@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <nav th:fragment="menu" class="menu">
+        <div class="logo">
+            <a href="/index">Library</a>
+        </div>
+        <div class="wrap">
+            <ul class="main_menu">
+                <li class="menu_item"><a th:href="@{/books}" class="menu_link">Livres</a></li>
+                <li class="menu_item"><a th:href="@{/authors}" class="menu_link">Auteurs</a></li>
+                <li th:unless="${session.user == null}" class="menu_item"><a th:href="@{/user/}+${session.user.id}" class="menu_link">Profil</a></li>
+                <li th:if="${session.user == null}" class="menu_item"><a th:href="@{/signin}" class="menu_link">Connexion</a></li>
+                <li th:if="${session.user == null}" class="menu_item"><a th:href="@{/signup}" class="menu_link">Inscription</a></li>
+                <li th:unless="${session.user == null}" class="menu_item"><a th:href="@{/signout}" class="menu_link">Déconnexion</a></li>
+                <form action="/search" method="post">
+                    <input type="text" name="search" th:value="${search}">
+                    <button type="submit">Rechercher</button>
+                </form>
+            </ul>
+        </div>
+    </nav>
+</body>
+</html>

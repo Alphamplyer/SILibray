@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush|Rambla:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>Incription</title>
+</head>
+<body>
+<div th:replace="menu :: menu"></div>
+<div class="l-container">
+    <h1>Inscription</h1>
+    <form th:action="@{/signup}" th:object="${user}" method="POST" enctype="utf8">
+        <div>
+            <label>Prénom</label>
+            <input type="text" th:field="*{firstName}"/>
+            <p class="error" th:each="error: ${#fields.errors('firstName')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Nom</label>
+            <input type="text" th:field="*{lastName}"/>
+            <p class="error" th:each="error : ${#fields.errors('lastName')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Pseudonyme</label>
+            <input type="text" th:field="*{nickname}"/>
+            <p class="error" th:each="error : ${#fields.errors('nickname')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Email</label>
+            <input type="email" th:field="*{email}"/>
+            <p class="error" th:each="error : ${#fields.errors('email')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Date de naissance</label>
+            <input type="date" th:field="*{birthDate}"/>
+            <p class="error" th:each="error : ${#fields.errors('birthDate')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Mod de passe</label>
+            <input type="password" th:field="*{password}"/>
+            <p class="error" th:each="error : ${#fields.errors('password')}"
+               th:text="${error}">Validation error</p>
+        </div>
+        <div>
+            <label>Confirmation du mode de passe</label>
+            <input type="password" th:field="*{passwordComfimation}"/>
+        </div>
+        <button type="submit">Je m'inscris</button>
+    </form>
+
+    <p>J'ai déjà un compte ! <a th:href="@{/signin}">Me connecter</a></p>
+</div>
+</body>
+</html>

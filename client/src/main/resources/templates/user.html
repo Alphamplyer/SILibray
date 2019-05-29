@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush|Rambla:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>Title</title>
+</head>
+<body>
+<div th:replace="menu :: menu"></div>
+<div class="l-container">
+    <div class="profil">
+        <h2>Informations Utilisateur</h2>
+        <table>
+            <tr>
+                <th>Prenom</th>
+                <td th:text="${user.firstName}"></td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td th:text="${user.lastName}"></td>
+            </tr>
+            <tr>
+                <th>Pseudonyme</th>
+                <td th:text="${user.nickname}"></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td th:text="${user.email}"></td>
+            </tr>
+            <tr>
+                <th>Date de naissance</th>
+                <td th:text="${#dates.format(user.birthDate, 'dd/MM/yyyy')}"></td>
+            </tr>
+        </table>
+    </div>
+    <div th:if="${loans != null}" class="loans">
+        <h2>Livre(s) Emprunté(s)</h2>
+        <table class="large_table">
+            <tr>
+                <th>Nom du livre</th>
+                <th>Date de l'emprunt</th>
+                <th>Date butoire</th>
+                <th>Statut</th>
+            </tr>
+            <th:block th:each="item: ${loans}">
+                <tr>
+                    <td><a th:text="${item.book.name}" th:href="@{/loans/}+${item.loan.id}"></a></td>
+                    <td th:text="${#dates.format(item.loan.beginDate, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#dates.format(item.loan.endDate, 'dd/MM/yyyy')}"></td>
+                    <th:block th:if="${item.loan.endDate.after(#dates.createNow())}">
+                        <td class="yellow" th:if="${item.loan.extended == true and item.loan.archived == false}">Emprunt Prolongé</td>
+                        <td class="green" th:if="${item.loan.extended == false and item.loan.archived == false}">Emprunté</td>
+                        <td class="green" th:if="${item.loan.archived == true}">Rendu</td>
+                    </th:block>
+                    <th:block th:if="${item.loan.endDate.before(#dates.createNow())}">
+                        <td class="red">Non Rendu</td>
+                    </th:block>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</div>
+</body>
+</html>

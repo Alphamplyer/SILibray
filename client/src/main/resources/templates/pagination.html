@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="pagination" class="pagination">
+        <a class="page_button min_page"  th:if="${hasPrevPage}" href="/books?page=1">&lsaquo;&lsaquo;</a>
+        <a class="page_button prev_page" th:if="${hasPrevPage}" th:href="@{'/books?page='+${currentPage - 1}}">&lsaquo;</a>
+        <a class="page_button current_page" th:if="${maxPage != 1}" th:href="@{'books?page='+${currentPage}}" th:text="${currentPage}"></a>
+        <a class="page_button next_page" th:if="${hasNextPage}" th:href="@{'/books?page='+${currentPage + 1}}">&rsaquo;</a>
+        <a class="page_button max_page" th:if="${hasNextPage}" th:href="@{'/books?page='+${maxPage}}">&rsaquo;&rsaquo;</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+.menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: $menu_width;
+    background-color: $second_background_color;
+    overflow: hidden;
+
+    a {
+        display: block;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .logo a {
+        margin: 20px 0 50px 0;
+        width: $menu_width;
+        text-align: center;
+        font-size: 42px;
+        font-weight: 700;
+        font-family: 'Alex Brush', cursive;
+        text-transform: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .main_menu {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        .menu_item {
+            margin: 0;
+            width: $menu_width;
+            padding: 0;
+
+            .menu_link {
+                padding: 8px 0 8px 20px;
+                font-size: 20px;
+                font-weight: 400;
+
+                &:hover {
+                    background-color: $second_background_color_hover;
+                    color: $main_color;
+                }
+            }
+        }
+
+        form {
+            width: $menu_width;
+            position: absolute;
+            bottom: 10px;
+        }
+
+        input, button {
+            width: $menu_width - 20px;
+            margin: 10px 10px 0 10px;
+        }
+
+        input {
+            box-sizing: border-box;
+            background-color: #0e1012;
+        }
+    }
+}

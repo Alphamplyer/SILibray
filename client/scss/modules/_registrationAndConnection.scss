@@ -1,0 +1,41 @@
+label {
+    display: block;
+}
+
+form {
+
+    input {
+        width: 250px;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: $second_background_color;
+        color: white;
+    }
+
+    div {
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    button, div {
+        margin: 10px 10px 15px 0;
+    }
+
+    button {
+        background-color: $main_color;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 14px;
+        color: white;
+    }
+
+    p {
+        margin-top: 4px;
+    }
+
+    .error {
+        color: $foreground_error_color;
+    }
+}
+
