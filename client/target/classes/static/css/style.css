@@ -1,0 +1,194 @@
+p, a, h1, h2, h3, h4, h5, h6, td, th, label, input, button {
+  color: #b0b0b0;
+  font-family: 'Rambla', sans-serif; }
+
+body, html, p {
+  margin: 0;
+  padding: 0; }
+
+body {
+  background-color: #2B2D2F; }
+
+a {
+  color: #c9c9c9;
+  text-decoration: none; }
+  a:hover {
+    color: #d6d6d6;
+    text-decoration: underline; }
+
+a, p, button, td, th input {
+  font-size: 16px; }
+
+button, a {
+  font-weight: 600; }
+
+td a {
+  font-weight: normal; }
+
+.l-container {
+  margin: 0 10px 0 260px; }
+
+label {
+  display: block; }
+
+form input {
+  width: 250px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1D1F21;
+  color: white; }
+form div {
+  display: block;
+  margin-bottom: 4px; }
+form button, form div {
+  margin: 10px 10px 15px 0; }
+form button {
+  background-color: #608cff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 14px;
+  color: white; }
+form p {
+  margin-top: 4px; }
+form .error {
+  color: #e5182c; }
+
+table {
+  width: 700px;
+  border-collapse: collapse; }
+  table tr {
+    background-color: #222426; }
+    table tr:nth-child(even) {
+      background-color: #1D1F21; }
+      table tr:nth-child(even) th {
+        background-color: #204182; }
+  table th, table td {
+    padding: 15px;
+    text-align: left; }
+  table td {
+    width: 500px;
+    text-align: justify; }
+  table th {
+    background-color: #204699;
+    width: 200px; }
+  table .red {
+    color: #ff1e34 !important; }
+  table .green {
+    color: #35b727 !important; }
+  table .yellow {
+    color: #f7ff51 !important; }
+
+.large_table {
+  width: 100%; }
+  .large_table tr:hover {
+    background-color: #37393b; }
+  .large_table tr:nth-child(even) th {
+    background-color: #204699; }
+
+.error_message {
+  margin: 30px auto;
+  padding: 7px 10px;
+  background-color: #ff463d;
+  border: 1px solid #ff0d3b;
+  border-radius: 5px; }
+  .error_message p {
+    color: #ffe5ed; }
+
+.button {
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+  margin: 5px 0;
+  background-color: #608cff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 14px;
+  color: #dcdcdc; }
+  .button:hover {
+    background-color: #7f99ff;
+    text-decoration: none;
+    color: #fff; }
+
+.pagination {
+  margin: 20px auto;
+  width: 170px;
+  height: 30px;
+  position: relative; }
+  .pagination .page_button {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background-color: #608cff;
+    color: #c9c9c9;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 15px;
+    margin: 0;
+    position: absolute; }
+    .pagination .page_button:hover {
+      background-color: #7f99ff;
+      color: #d6d6d6; }
+    .pagination .page_button.min_page {
+      left: 0px; }
+    .pagination .page_button.prev_page {
+      left: 35px; }
+    .pagination .page_button.current_page {
+      left: 70px;
+      right: 70px; }
+    .pagination .page_button.next_page {
+      right: 35px; }
+    .pagination .page_button.max_page {
+      right: 0px; }
+
+.menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  width: 250px;
+  background-color: #1D1F21;
+  overflow: hidden; }
+  .menu a {
+    display: block; }
+    .menu a:hover {
+      text-decoration: none; }
+  .menu .logo a {
+    margin: 20px 0 50px 0;
+    width: 250px;
+    text-align: center;
+    font-size: 42px;
+    font-weight: 700;
+    font-family: 'Alex Brush', cursive;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+  .menu .main_menu {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    .menu .main_menu .menu_item {
+      margin: 0;
+      width: 250px;
+      padding: 0; }
+      .menu .main_menu .menu_item .menu_link {
+        padding: 8px 0 8px 20px;
+        font-size: 20px;
+        font-weight: 400; }
+        .menu .main_menu .menu_item .menu_link:hover {
+          background-color: #252729;
+          color: #608cff; }
+    .menu .main_menu form {
+      width: 250px;
+      position: absolute;
+      bottom: 10px; }
+    .menu .main_menu input, .menu .main_menu button {
+      width: 230px;
+      margin: 10px 10px 0 10px; }
+    .menu .main_menu input {
+      box-sizing: border-box;
+      background-color: #0e1012; }
+
+/*# sourceMappingURL=style.css.map */

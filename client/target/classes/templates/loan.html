@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush|Rambla:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>Livre</title>
+</head>
+<body>
+<div th:replace="menu :: menu"></div>
+<div class="l-container">
+    <h1 th:if="${displayLoan == false && extendeddate == null}">Emprunter un livre</h1>
+    <h1 th:if="${displayLoan == true}">Information : Prêt du livre</h1>
+    <h1 th:if="${displayLoan == false && extendeddate != null}">Prolongation du prêt</h1>
+    <div th:if="${loan != null}">
+        <a th:href="@{/loans/extend/}+${book.id}" class="button" th:if="${displayLoan and loan.extended == false and loan.archived == false}">Étendre l'emprunt</a>
+    </div>
+    <table>
+        <tr>
+            <th>Livre</th>
+            <td th:text="${book.name}"></td>
+        </tr>
+        <tr>
+            <th>Nom d'emprunt</th>
+            <td th:text="${session.user.lastName} + ' ' + ${session.user.firstName}"></td>
+        </tr>
+        <tr>
+            <th>Début de l'emprunt</th>
+            <td th:text="${#dates.format(begindate, 'dd/MM/yyyy')}"></td>
+        </tr>
+        <tr>
+            <th>Fin de l'emprunt</th>
+            <td th:if="${extendeddate == null}" th:text="${#dates.format(enddate, 'dd/MM/yyyy')}"></td>
+            <td th:unless="${extendeddate == null}" th:text="${#dates.format(enddate, 'dd/MM/yyyy')} + ' => ' + ${#dates.format(extendeddate, 'dd/MM/yyyy')}"></td>
+        </tr>
+    </table>
+
+    <div th:if="${displayLoan == false}">
+        <div th:if="${extendeddate == null}">
+            <form th:action="@{'/loans/new/'+${book.id}}" method="post">
+                <a th:href="@{'/books/'+${book.id}}" class="button">Annuler</a>
+                <button type="submit" class="button">Comfirmer</button>
+            </form>
+        </div>
+        <div th:unless="${extendeddate == null}">
+            <form th:action="@{'/loans/extend/'+${loan.id}}" method="post">
+                <a th:href="@{'/loans/'+${loan.id}}" class="button">Annuler</a>
+                <button type="submit" class="button">Comfirmer</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

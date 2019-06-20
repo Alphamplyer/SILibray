@@ -1,0 +1,35 @@
+{
+  "groups": [
+    {
+      "name": "library",
+      "type": "com.library.client.configurations.ApplicationProperties",
+      "sourceType": "com.library.client.configurations.ApplicationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "library.default-reservation-weeks",
+      "type": "java.lang.Integer",
+      "sourceType": "com.library.client.configurations.ApplicationProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "library.extend-reservation-weeks",
+      "type": "java.lang.Integer",
+      "sourceType": "com.library.client.configurations.ApplicationProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "library.number-element-by-page",
+      "type": "java.lang.Integer",
+      "sourceType": "com.library.client.configurations.ApplicationProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "library.service-u-r-l",
+      "type": "java.lang.String",
+      "sourceType": "com.library.client.configurations.ApplicationProperties"
+    }
+  ],
+  "hints": []
+}

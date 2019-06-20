@@ -6,8 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
+@PropertySource("file:${application_home}/client.properties")
 @SpringBootApplication
 public class ClientApplication extends SpringBootServletInitializer {
 

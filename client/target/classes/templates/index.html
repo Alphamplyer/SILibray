@@ -1,0 +1,52 @@
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush|Rambla:400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <title>Accueil</title>
+</head>
+<body>
+    <div th:replace="menu :: menu"></div>
+
+    <div class="l-container">
+        <h1>Nouveaux Livres</h1>
+        <table class="large_table">
+            <tr>
+                <th>Nom</th>
+                <th>Date de Parution</th>
+                <th>Référence</th>
+                <th>Statut</th>
+            </tr>
+            <th:block th:each="newBook: ${newBooks}">
+                <tr>
+                    <td><a th:href="@{/books/}+${newBook.id}" th:text="${newBook.name}"></a></td>
+                    <td th:text="${#dates.format(newBook.releaseDate, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${newBook.bookReference}"></td>
+                    <td th:if="${newBook.available}" class="book_available green">Disponible</td>
+                    <td th:unless="${newBook.available}" class="book_no_available red">Indisponible</td>
+                </tr>
+            </th:block>
+        </table>
+
+        <h1>Livres Récemments Enpruntés</h1>
+        <table class="large_table">
+            <tr>
+                <th>Nom</th>
+                <th>Date de Parution</th>
+                <th>Référence</th>
+                <th>Statut</th>
+            </tr>
+            <th:block th:each="recentLoanedBook: ${recentLoanedBooks}">
+                <tr>
+                    <td><a th:href="@{/books/}+${recentLoanedBook.id}" th:text="${recentLoanedBook.name}"></a></td>
+                    <td th:text="${#dates.format(recentLoanedBook.releaseDate, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${recentLoanedBook.bookReference}"></td>
+                    <td th:if="${recentLoanedBook.available}" class="book_available green">Disponible</td>
+                    <td th:unless="${recentLoanedBook.available}" class="book_no_available red">Indisponible</td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</body>
+</html>
