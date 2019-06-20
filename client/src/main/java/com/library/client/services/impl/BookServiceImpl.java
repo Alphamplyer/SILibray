@@ -3,6 +3,7 @@ package com.library.client.services.impl;
 import com.library.client.model.Book;
 import com.library.client.services.AbstractService;
 import com.library.client.services.interf.BookService;
+import com.library.client.utils.ExtendedList;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
@@ -47,21 +48,21 @@ public class BookServiceImpl extends AbstractService implements BookService {
 
     private List<Book> getBookAssociatedByReferences(Book[] books) {
 
-        Map<String, Book> bookMap = new HashMap<>();
+        ExtendedList<String, Book> ref_books = new ExtendedList<>();
 
         if (books != null) {
-            for (Book book:books) {
-                if (!bookMap.containsKey(book.getBookReference())) {
-                    bookMap.put(book.getBookReference(), book);
+            for (int i = 0; i < books.length; i++) {
+                if (!ref_books.getKeys().contains(books[i].getBookReference())) {
+                    ref_books.add(books[i].getBookReference(), books[i]);
                 }
-                else if (book.isAvailable()) {
-                    Book available_book = bookMap.get(book.getBookReference());
+                else if (books[i].isAvailable()) {
+                    Book available_book = ref_books.getValue(books[i].getBookReference());
                     available_book.setAvailable(true);
-                    available_book.setId(book.getId());
+                    available_book.setId(books[i].getId());
                 }
             }
 
-            return new ArrayList<>(bookMap.values());
+            return ref_books.getValues();
         } else {
             return null;
         }

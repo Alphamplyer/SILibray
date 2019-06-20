@@ -7,6 +7,7 @@ import com.library.webservice.web.exceptions.SQLConflitcException;
 import com.library.webservice.web.exceptions.UnableToAddException;
 import com.library.webservice.web.exceptions.UnableToModifyException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class LoanController {
 
     @GetMapping(value = "/Loans")
     public List<Loan> getLoans() {
-        List<Loan> loans = loanDao.findAll();
+        List<Loan> loans = loanDao.findAll(Sort.by("beginDate").descending());
 
         if (loans.isEmpty()) throw new NotFoundException("There are no loans currently !");
 

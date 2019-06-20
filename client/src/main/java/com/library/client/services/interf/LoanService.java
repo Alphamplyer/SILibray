@@ -8,6 +8,8 @@ public interface LoanService {
 
     Loan getLoan(int loan_id);
 
+    List<Loan> getLoans();
+
     List<Loan> getUserLoans(int user_id);
 
     Loan registerLoan(int book_id, int user_id);

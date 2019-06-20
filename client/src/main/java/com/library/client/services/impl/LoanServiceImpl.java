@@ -19,6 +19,12 @@ public class LoanServiceImpl extends AbstractService implements LoanService {
     }
 
     @Override
+    public List<Loan> getLoans() {
+        Loan[] loans = restTemplate.getForObject(properties.getServiceURL() + "Loans", Loan[].class);
+        return loans == null ? null : Arrays.asList(loans);
+    }
+
+    @Override
     public List<Loan> getUserLoans(int user_id) {
         Loan[] loans = restTemplate.getForObject(properties.getServiceURL() + "Loans/user/" + user_id, Loan[].class);
         return loans == null ? null : Arrays.asList(loans);

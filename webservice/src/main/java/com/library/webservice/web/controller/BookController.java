@@ -26,7 +26,7 @@ public class BookController {
 
     @GetMapping(value = "/Books")
     public List<Book> getBooks() {
-        List<Book> books = bookDao.findAll();
+        List<Book> books = bookDao.selectAll();
 
         if (books.isEmpty()) throw new NotFoundException("There are no books currently !");
 

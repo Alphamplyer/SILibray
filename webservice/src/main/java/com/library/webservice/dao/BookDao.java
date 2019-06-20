@@ -10,6 +10,9 @@ import java.util.List;
 @Repository
 public interface BookDao extends JpaRepository<Book, Integer> {
 
+    @Query("select b from Book b order by b.releaseDate desc")
+    List<Book> selectAll();
+
     List<Book> findBooksByAuthorId(int authorId);
 
     List<Book> findBooksByBookReference(String bookReference);
