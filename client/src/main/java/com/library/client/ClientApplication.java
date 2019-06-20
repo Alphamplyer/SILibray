@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
-@PropertySource("file:${application_home}/client.properties")
+@PropertySource("file:${APP_HOME}/client.properties")
 @SpringBootApplication
 public class ClientApplication extends SpringBootServletInitializer {
 
@@ -44,4 +44,7 @@ public class ClientApplication extends SpringBootServletInitializer {
 
 	@Bean(value = "restTemplate")
 	public RestTemplate getRestTemplate() { return new RestTemplate(); }
+
+	@Bean(value = "commentService")
+	public CommentService getCommentService() { return new CommentServiceImpl(); }
 }

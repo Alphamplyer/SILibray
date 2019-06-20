@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "library",
+      "type": "com.library.batch_checkloan.configuration.ApplicationProperties",
+      "sourceType": "com.library.batch_checkloan.configuration.ApplicationProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "library.service-u-r-l",
+      "type": "java.lang.String",
+      "sourceType": "com.library.batch_checkloan.configuration.ApplicationProperties"
+    }
+  ],
+  "hints": []
+}
