@@ -1,0 +1,111 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+.comment_section {
+    display: block;
+    margin: 20px;
+    padding: 10px;
+    background-color: $second_background_color;
+    border-radius: 10px;
+
+    h3 {
+        float: left;
+        margin-top: 7px;
+        padding: 0;
+    }
+
+    fieldset {
+        border: none;
+        float: right;
+    }
+
+    .rating > input { display: none; }
+    .rating > label:before {
+        margin: 5px;
+        font-size: 1.25em;
+        font-family: FontAwesome;
+        display: inline-block;
+        content: "\f005";
+    }
+
+    .rating > .half:before {
+        content: "\f089";
+        position: absolute;
+    }
+
+    .rating > label {
+        color: #ddd;
+        float: right;
+    }
+
+    .rating > input:checked ~ label,
+    .rating:not(:checked) > label:hover,
+    .rating:not(:checked) > label:hover ~ label {
+        color: #FFD700;
+    }
+
+    .rating > input:checked + label:hover,
+    .rating > input:checked ~ label:hover,
+    .rating > label:hover ~ input:checked ~ label,
+    .rating > input:checked ~ label:hover ~ label {
+        color: #FFED85;
+    }
+
+    textarea {
+        box-sizing: border-box;
+        resize: none;
+        display: block;
+        height: 100px;
+        width: 100%;
+        margin: 10px 0;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 5px;
+        background-color: #0e1012;
+        color: white;
+    }
+}
+
+.comment {
+    display: block;
+    margin: 20px;
+    padding: 10px;
+    background-color: $second_background_color;
+    border-radius: 10px;
+    position: relative;
+
+    .display-rating {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .author {
+        display: block;
+        font-weight: bold;
+        padding: 0;
+    }
+
+    .date, .content {
+        box-sizing: border-box;
+        display: block;
+        width: 100%;
+    }
+
+    .date {
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+}
+
+.display-rating {
+    display: block;
+    float: right;
+
+    .checked {
+        color: #FFD700;
+    }
+}
+
+.user-notation .display-rating {
+    float : left;
+}

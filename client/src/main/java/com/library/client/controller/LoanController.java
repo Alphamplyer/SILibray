@@ -3,17 +3,12 @@ package com.library.client.controller;
 import com.library.client.model.Book;
 import com.library.client.model.Loan;
 import com.library.client.model.User;
-import com.library.client.services.interf.BookService;
-import com.library.client.services.interf.LoanService;
-import com.library.client.services.interf.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,29 +19,6 @@ import java.util.List;
 
 @Controller
 public class LoanController extends AbstractController {
-
-    // PRIVATE VARIABLES ///////////////////////////////////////////////////
-
-    private BookService bookService;
-    private LoanService loanService;
-    private UserService userService;
-
-    // SETTERS /////////////////////////////////////////////////////////////
-
-    @Autowired
-    public void setBookService(BookService bookService) {
-        this.bookService = bookService;
-    }
-
-    @Autowired
-    public void setLoanService(LoanService loanService) {
-        this.loanService = loanService;
-    }
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 
     // MAPPING /////////////////////////////////////////////////////////////
 

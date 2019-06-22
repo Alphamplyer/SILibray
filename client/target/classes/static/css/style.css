@@ -1,3 +1,4 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 p, a, h1, h2, h3, h4, h5, h6, td, th, label, input, button {
   color: #b0b0b0;
   font-family: 'Rambla', sans-serif; }
@@ -190,5 +191,86 @@ table {
     .menu .main_menu input {
       box-sizing: border-box;
       background-color: #0e1012; }
+
+.comment_section {
+  display: block;
+  margin: 20px;
+  padding: 10px;
+  background-color: #1D1F21;
+  border-radius: 10px; }
+  .comment_section h3 {
+    float: left;
+    margin-top: 7px;
+    padding: 0; }
+  .comment_section fieldset {
+    border: none;
+    float: right; }
+  .comment_section .rating > input {
+    display: none; }
+  .comment_section .rating > label:before {
+    margin: 5px;
+    font-size: 1.25em;
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f005"; }
+  .comment_section .rating > .half:before {
+    content: "\f089";
+    position: absolute; }
+  .comment_section .rating > label {
+    color: #ddd;
+    float: right; }
+  .comment_section .rating > input:checked ~ label,
+  .comment_section .rating:not(:checked) > label:hover,
+  .comment_section .rating:not(:checked) > label:hover ~ label {
+    color: #FFD700; }
+  .comment_section .rating > input:checked + label:hover,
+  .comment_section .rating > input:checked ~ label:hover,
+  .comment_section .rating > label:hover ~ input:checked ~ label,
+  .comment_section .rating > input:checked ~ label:hover ~ label {
+    color: #FFED85; }
+  .comment_section textarea {
+    box-sizing: border-box;
+    resize: none;
+    display: block;
+    height: 100px;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0e1012;
+    color: white; }
+
+.comment {
+  display: block;
+  margin: 20px;
+  padding: 10px;
+  background-color: #1D1F21;
+  border-radius: 10px;
+  position: relative; }
+  .comment .display-rating {
+    position: absolute;
+    right: 10px;
+    top: 10px; }
+  .comment .author {
+    display: block;
+    font-weight: bold;
+    padding: 0; }
+  .comment .date, .comment .content {
+    box-sizing: border-box;
+    display: block;
+    width: 100%; }
+  .comment .date {
+    font-size: 11px;
+    margin-bottom: 10px; }
+
+.display-rating {
+  display: block;
+  float: right; }
+  .display-rating .checked {
+    color: #FFD700; }
+
+.user-notation .display-rating {
+  float: left; }
 
 /*# sourceMappingURL=style.css.map */

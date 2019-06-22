@@ -19,7 +19,7 @@
     <table>
         <tr>
             <th>Livre</th>
-            <td th:text="${book.name}"></td>
+            <td><a th:href="@{'/books/'+${book.id}}" th:text="${book.name}"></a> </td>
         </tr>
         <tr>
             <th>Nom d'emprunt</th>

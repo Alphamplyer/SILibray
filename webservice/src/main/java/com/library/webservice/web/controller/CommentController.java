@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -40,6 +42,8 @@ public class CommentController {
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
 
         Comment created_comment;
+
+        comment.setCreationTime(new Timestamp(new Date().getTime()));
 
         try {
             created_comment = commentDao.save(comment);

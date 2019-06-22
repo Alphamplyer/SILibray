@@ -1,7 +1,10 @@
 package com.library.client.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.sql.Timestamp;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Comment {
 
     private int id;
@@ -16,6 +19,7 @@ public class Comment {
 
     private String bookReference;
 
+    public Comment() { super(); }
 
     public Comment(int authorId, String content, int notation, String bookReference) {
         this.authorId = authorId;

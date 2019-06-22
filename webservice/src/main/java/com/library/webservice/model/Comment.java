@@ -32,6 +32,7 @@ public class Comment {
     private String bookReference;
 
 
+    public Comment() { super(); }
     public Comment(int authorId, String content, int notation, String bookReference) {
         this.authorId = authorId;
         this.content = content;

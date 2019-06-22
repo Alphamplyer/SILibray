@@ -22,30 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class UserController {
+public class UserController extends AbstractController {
 
-    // PRIVATE VARIABLES ///////////////////////////////////////////////////
-
-    private BookService bookService;
-    private LoanService loanService;
-    private UserService userService;
-
-    // SETTERS /////////////////////////////////////////////////////////////
-
-    @Autowired
-    public void setBookService(BookService bookService) {
-        this.bookService = bookService;
-    }
-
-    @Autowired
-    public void setLoanService(LoanService loanService) {
-        this.loanService = loanService;
-    }
-
-    @Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
 
     @RequestMapping("/user")
     public ModelAndView displayUserAfterRegistrationOrLogin(@ModelAttribute("user") User user) {

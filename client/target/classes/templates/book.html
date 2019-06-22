@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Alex+Brush|Rambla:400,400i,700,700i" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <title>Livre</title>
@@ -11,6 +12,7 @@
 <div th:replace="menu :: menu"></div>
 <div class="l-container">
     <h1>Informations sur le Livre</h1>
+
     <div>
         <p th:text="'Il reste ' + ${numberOfAvailableBook} + '/' + ${maxBook} +' exemplaire(s)'"></p>
         <a th:href="@{'/loans/new/'+${book.id}}" class="button" th:if="${book.available}">Emprunter</a>
@@ -19,6 +21,19 @@
         <tr>
             <th>Nom</th>
             <td th:text="${book.name}"></td>
+        </tr>
+        <tr>
+            <th>Note Utilisateur</th>
+            <td class="user-notation">
+                <div class="display-rating">
+                    <th:block th:each="i : ${#numbers.sequence( 1, average_notation, 1)}">
+                        <span class="fa fa-star checked"></span>
+                    </th:block>
+                    <th:block th:each="i : ${#numbers.sequence( 1, 5 - average_notation, 1)}">
+                        <span class="fa fa-star"></span>
+                    </th:block>
+                </div>
+            </td>
         </tr>
         <tr>
             <th>Author</th>
@@ -37,6 +52,49 @@
             <td th:text="${book.summary}"></td>
         </tr>
     </table>
+
+    <h2>Commentaires</h2>
+
+
+    <div class="comment_section">
+        <th:block th:if="${session.user == null}">
+            <p>Pour laisser un commentaire vous devez être <a class="inline_link" th:href="@{/signin}">connecté</a>. Si vous n'êtes pas inscrit, vous pouvez le faire <a class="inline_link" th:href="@{/signup}">ici</a></p>
+        </th:block>
+        <th:block th:unless="${session.user == null}">
+            <p th:unless="${haveReadBook}">Vous devez avoir lu le livre pour le noter</p>
+            <form th:if="${haveReadBook}" class="comment_section_input" th:action="@{'/books/'+${book.id}+'/comment'}" method="post">
+                <h3>Laisse un commentaire</h3>
+                <fieldset class="rating">
+                    <input type="radio" id="star5" name="notation" value="5"/><label for="star5"></label>
+                    <input type="radio" id="star4" name="notation" value="4"/><label for="star4"></label>
+                    <input type="radio" id="star3" name="notation" value="3"/><label for="star3"></label>
+                    <input type="radio" id="star2" name="notation" value="2"/><label for="star2"></label>
+                    <input type="radio" id="star1" name="notation" value="1"/><label for="star1"></label>
+                </fieldset>
+
+                <textarea type="text" name="content" placeholder="Toi aussi laisse ton avis ..."></textarea>
+                <input class="button" type="submit">
+            </form>
+        </th:block>
+    </div>
+
+    <div class="comments">
+        <th:block th:each="comment : ${comments}">
+            <div class="comment">
+                <p class="author" th:text="${comment.author.nickname}"></p>
+                <div class="display-rating">
+                    <th:block th:each="i : ${#numbers.sequence( 1, comment.comment.notation, 1)}">
+                        <span class="fa fa-star checked"></span>
+                    </th:block>
+                    <th:block th:each="i : ${#numbers.sequence( 1, 5 - comment.comment.notation, 1)}">
+                        <span class="fa fa-star"></span>
+                    </th:block>
+                </div>
+                <p class="date" th:text="${comment.comment.creationTime}"></p>
+                <p class="content" th:text="${comment.comment.content}"></p>
+            </div>
+        </th:block>
+    </div>
 </div>
 </body>
 </html>

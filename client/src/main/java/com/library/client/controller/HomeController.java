@@ -15,20 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class HomeController {
-
-    private BookService bookService;
-    private LoanService loanService;
-
-    @Autowired
-    public void setBookService(BookService bookService) {
-        this.bookService = bookService;
-    }
-
-    @Autowired
-    public void setLoanService(LoanService loanService) {
-        this.loanService = loanService;
-    }
+public class HomeController extends AbstractController {
 
     @RequestMapping({"/", "/index"})
     public String home (Model model) {

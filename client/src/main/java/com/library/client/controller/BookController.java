@@ -1,14 +1,7 @@
 package com.library.client.controller;
 
-import com.library.client.model.Author;
-import com.library.client.model.Book;
-import com.library.client.model.Comment;
-import com.library.client.model.User;
-import com.library.client.services.interf.AuthorService;
-import com.library.client.services.interf.BookService;
-import com.library.client.services.interf.CommentService;
+import com.library.client.model.*;
 import com.library.client.utils.Pagination;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,35 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BookController extends AbstractController {
-
-    // PRIVATE VARIABLES ///////////////////////////////////////////////////
-
-    private AuthorService authorService;
-    private BookService bookService;
-    private CommentService commentService;
-
-    // SETTERS /////////////////////////////////////////////////////////////
-
-    @Autowired
-    public void setAuthorService(AuthorService authorService) {
-        this.authorService = authorService;
-    }
-
-    @Autowired
-    public void setBookService(BookService bookService) {
-        this.bookService = bookService;
-    }
-
-    @Autowired
-    public void setCommentService(CommentService commentService) {
-        this.commentService = commentService;
-    }
 
     // MAPPING /////////////////////////////////////////////////////////////
 
@@ -83,12 +57,18 @@ public class BookController extends AbstractController {
     }
 
     @RequestMapping("/books/{id}")
-    public String displayBook(Model model, @PathVariable int id) {
+    public String displayBook(Model model, @PathVariable int id, HttpSession httpSession) {
+
+        if (httpSession.getAttribute("user") != null) {
+            User user = (User) httpSession.getAttribute("user");
+            model.addAttribute("haveReadBook", haveReadBook(user.getId(), id));
+        }
 
         Book book = null;
         List<Book> books = null;
         Author author = null;
         List<Comment> comments = null;
+        List<Author> comments_authors = null;
         int numberOfAvailableBook = 0;
 
         try {
@@ -101,38 +81,34 @@ public class BookController extends AbstractController {
                     numberOfAvailableBook++;
             }
         }
-        catch (HttpClientErrorException e) {
-            HttpStatus status = e.getStatusCode();
-
-            if (status == HttpStatus.NOT_FOUND) {
-                model.addAttribute("error_message", "Le livre n'a pas était trouvé ! Il ce peux que nos service est un problème !");
-                return "error";
-            }
-        }
-        catch (NullPointerException e) {
-            model.addAttribute("error_message", "Le livre n'a pas était trouvé ! Il ce peut, que nos service est un problème !");
+        catch (Exception e) {
+            model.addAttribute("error_message", "Le livre n'a pas était trouvé ! Il ce peux que nos service est un problème !");
             return "error";
         }
 
-        if (book != null) {
+        try {
+            comments = commentService.getCommentFromBookRef(book.getBookReference());
+            int average_notation = commentService.getAverageNotation(comments);
 
-            try {
-                comments = commentService.getCommentFromBookRef(book.getBookReference());
+            System.out.println("Average Notation = " + average_notation);
 
-                int average_notation = commentService.getAverageNotation(comments);
+            List<CommentAuthor> commentAuthors = new ArrayList<>();
 
-                model.addAttribute("average_notation", average_notation);
-                model.addAttribute("comments", comments);
-            } catch (HttpClientErrorException e) {
-                HttpStatus status = e.getStatusCode();
-
-                if (status == HttpStatus.NOT_FOUND) {
-                    model.addAttribute("comments", null);
-                }
+            for (int i = 0; i < comments.size(); i++) {
+                User comment_author = userService.getUser(comments.get(i).getAuthorId());
+                commentAuthors.add(new CommentAuthor(comments.get(i), comment_author));
             }
+
+            model.addAttribute("average_notation", average_notation);
+            model.addAttribute("comments", commentAuthors);
+        } catch (Exception e) {
+            e.printStackTrace();
+            model.addAttribute("average_notation", 0);
+            model.addAttribute("comments", null);
+            model.addAttribute("comments_authors", null);
         }
 
-        model.addAttribute("maxBook", books == null ? 0 : books.size());
+        model.addAttribute("maxBook", books.size());
         model.addAttribute("numberOfAvailableBook", numberOfAvailableBook);
         model.addAttribute("book", book);
         model.addAttribute("author", author);
@@ -141,7 +117,7 @@ public class BookController extends AbstractController {
     }
 
     @RequestMapping(value = "/books/{id}/comment", method = RequestMethod.POST)
-    public String createComment(Model model, @PathVariable(name = "id") int id, @RequestParam("content") String content, @RequestParam("notation") String notation_str, HttpSession session) {
+    public String createComment(Model model, RedirectAttributes redirectAttributes, @PathVariable(name = "id") int id, @RequestParam("content") String content, @RequestParam("notation") String notation_str, HttpSession session) {
 
         int notation;
 
@@ -153,8 +129,8 @@ public class BookController extends AbstractController {
         }
 
         if (notation < 0 || notation > 5 || content.length() == 0) {
-            model.addAttribute("error_message", "Votre commentaire n'est pas valide");
-            return "redirect:error";
+            redirectAttributes.addAttribute("error_message", "Votre commentaire n'est pas valide");
+            return "redirect:/error";
         }
 
         Book book;
@@ -166,8 +142,8 @@ public class BookController extends AbstractController {
         }
 
         if (book == null) {
-            model.addAttribute("error_message", "Une erreur c'est produite ! Veuillez réessayer !");
-            return "redirect:error";
+            redirectAttributes.addAttribute("error_message", "Une erreur c'est produite ! Veuillez réessayer !");
+            return "redirect:/error";
         }
 
         User user;
@@ -175,8 +151,8 @@ public class BookController extends AbstractController {
         if (session.getAttribute("user") != null)
             user = (User)session.getAttribute("user");
         else {
-            model.addAttribute("error_message", "Une erreur c'est produite ! Veuillez réessayer !");
-            return "redirect:error";
+            redirectAttributes.addAttribute("error_message", "Vous n'êtes pas connecté ! Connectez-vous et réessayé !");
+            return "redirect:/error";
         }
 
         try {
@@ -185,11 +161,33 @@ public class BookController extends AbstractController {
             HttpStatus status = e.getStatusCode();
 
             if (status == HttpStatus.NOT_FOUND) {
-                model.addAttribute("error_message", "Une erreur c'est produite ! Veuillez réessayer !");
-                return "redirect:error";
+                redirectAttributes.addAttribute("error_message", "Une erreur c'est produite ! Veuillez réessayer !");
+                return "redirect:/error";
             }
         }
 
-        return "redirect:book/" + book.getId();
+        return "redirect:/books/" + id;
+    }
+
+    // PRIVATE METHODS /////////////////////////////////////////////////////
+
+    private boolean haveReadBook(int user_id, int book_id) {
+        boolean haveReadThisBook = false;
+        List<Loan> loans;
+
+        try {
+            loans = loanService.getUserLoans(user_id);
+        } catch (Exception e) {
+            return false;
+        }
+
+        for (Loan loan : loans) {
+            if (loan.getBookId() == book_id) {
+                haveReadThisBook = true;
+                break;
+            }
+        }
+
+        return haveReadThisBook;
     }
 }

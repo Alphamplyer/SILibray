@@ -17,13 +17,6 @@ import java.util.List;
 @Controller
 public class SearchController extends AbstractController {
 
-    private SearchService searchService;
-
-    @Autowired
-    public void setSearchService(SearchService searchService) {
-        this.searchService = searchService;
-    }
-
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(Model model, @RequestParam String search) {
 
