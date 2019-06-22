@@ -8,7 +8,17 @@
   ],
   "properties": [
     {
+      "name": "library.custom-message",
+      "type": "java.lang.String",
+      "sourceType": "com.library.batch_checkloan.configuration.ApplicationProperties"
+    },
+    {
       "name": "library.service-u-r-l",
+      "type": "java.lang.String",
+      "sourceType": "com.library.batch_checkloan.configuration.ApplicationProperties"
+    },
+    {
+      "name": "library.title-message",
       "type": "java.lang.String",
       "sourceType": "com.library.batch_checkloan.configuration.ApplicationProperties"
     }

@@ -11,7 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 
+@PropertySource("file:${APP_HOME}/batch.properties")
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
 @EnableBatchProcessing
 public class BatchCheckloanApplication {

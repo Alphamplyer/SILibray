@@ -3,7 +3,6 @@ package com.library.batch_checkloan.configuration;
 import com.library.batch_checkloan.BatchTasklet;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.JobLauncher;
@@ -13,7 +12,6 @@ import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import javax.sql.DataSource;
@@ -60,10 +58,8 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
         JobParameters parameters = new JobParametersBuilder().addLong("currentTime", System.currentTimeMillis()).toJobParameters();
         try {
             jobLauncher.run(job(), parameters);
-        } catch (JobExecutionAlreadyRunningException e) {
-        } catch (JobRestartException e) {
-        } catch (JobInstanceAlreadyCompleteException e) {
-        } catch (JobParametersInvalidException e) {
+        } catch (JobExecutionAlreadyRunningException | JobRestartException | JobInstanceAlreadyCompleteException | JobParametersInvalidException e) {
+            e.printStackTrace();
         }
     }
 

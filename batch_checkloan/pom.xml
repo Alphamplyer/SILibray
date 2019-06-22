@@ -12,7 +12,6 @@
     <artifactId>batch_checkloan</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>batch_checkloan</name>
-    <packaging>war</packaging>
     <description>To send email when loan is out of date</description>
 
     <properties>
@@ -60,5 +59,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

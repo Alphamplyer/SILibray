@@ -1,5 +1,6 @@
 package com.library.batch_checkloan;
 
+import com.library.batch_checkloan.configuration.ApplicationProperties;
 import com.library.batch_checkloan.model.Book;
 import com.library.batch_checkloan.model.Loan;
 import com.library.batch_checkloan.model.User;
@@ -15,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpClientErrorException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +28,12 @@ public class BatchTasklet implements Tasklet {
     private UserService userService;
     private BookService bookService;
     private LoanService loanService;
+    private ApplicationProperties properties;
+
+    @Autowired
+    public void setProperties(ApplicationProperties properties) {
+        this.properties = properties;
+    }
 
     @Autowired
     public void setEmailService(EmailServiceImpl emailService) {
@@ -87,13 +96,22 @@ public class BatchTasklet implements Tasklet {
                 continue;
             }
 
-            String message = "Bonjour, " + user.getLastName() + " " + user.getFirstName();
-            message += "\nJe vous informe que vous devez retourner le livre suivant le plus vite possible sous peine de devoir payer ce dernier.\n\n";
-            message += "- " + book.getName() + " (Ref : " + book.getBookReference() + ")\n\n";
-            message += "Ne pas répondre à ce message. Ce message a été généré automatiquement, perssone ne vous repondra.\n" +
-                "Pour toutes demandes, veuillez vous adresser au service client de la Bibliothèque où vous avez emprunter ce livre !";
+            String title = properties.getTitleMessage();
+            String message = properties.getCustomMessage();
 
-            emailService.sendSimpleMessage(user.getEmail(), "[RAPPEL] Retourner le livre rapidement !", message);
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            String begindate = dateFormat.format(loan.getBeginDate());
+            String enddate = dateFormat.format(loan.getEndDate());
+
+            message = message.replace("%firstname%", user.getFirstName());
+            message = message.replace("%lastname%", user.getLastName());
+            message = message.replace("%nickname%", user.getNickname());
+            message = message.replace("%bookname%", book.getName());
+            message = message.replace("%bookref%",book.getBookReference());
+            message = message.replace("%begindate%", begindate);
+            message = message.replace("%enddate%",enddate);
+
+            emailService.sendSimpleMessage(user.getEmail(), title, message);
         }
 
         return RepeatStatus.FINISHED;
