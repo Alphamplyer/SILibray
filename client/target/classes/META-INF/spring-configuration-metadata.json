@@ -10,20 +10,17 @@
     {
       "name": "library.default-reservation-weeks",
       "type": "java.lang.Integer",
-      "sourceType": "com.library.client.configurations.ApplicationProperties",
-      "defaultValue": 0
+      "sourceType": "com.library.client.configurations.ApplicationProperties"
     },
     {
       "name": "library.extend-reservation-weeks",
       "type": "java.lang.Integer",
-      "sourceType": "com.library.client.configurations.ApplicationProperties",
-      "defaultValue": 0
+      "sourceType": "com.library.client.configurations.ApplicationProperties"
     },
     {
       "name": "library.number-element-by-page",
       "type": "java.lang.Integer",
-      "sourceType": "com.library.client.configurations.ApplicationProperties",
-      "defaultValue": 0
+      "sourceType": "com.library.client.configurations.ApplicationProperties"
     },
     {
       "name": "library.service-u-r-l",

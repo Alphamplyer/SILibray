@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
-@PropertySource("file:${APP_HOME}/client.properties")
+@PropertySource(value = "file:${APP_HOME}/client.properties", encoding = "UTF-8")
 @SpringBootApplication
 public class ClientApplication extends SpringBootServletInitializer {
 
