@@ -67,7 +67,11 @@ Les différents composants seront packagés avec Maven :
 ## Configuration et Déploiement
 
 ### Configuration
-Dans chaque projet se trouve un fichier "application.properties". Dans ces fichiers ce trouve de propriété qui peuvent être modifier :
+Pour configurer chaque projet, vous devez définir un variable d'environement système, où se trouve 3 fichiers :
+- webservice.properties : qui permet de configurer le webservice
+- client.properties : qui permet de configurer le client
+- batch.properties : qui permet de configurer le batch
+Les noms de ces fichiers ne sont pas modifiable !
 
 #### Web Service
 - ***server.port*** : correspond au port de connexion pour accéder au Web Service.
