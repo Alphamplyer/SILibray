@@ -8,6 +8,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+/**
+ * Classe pour valider les infos entré par l'utilisateur lors de l'inscription
+ */
 @PasswordMatches
 public class UserRegistration {
 

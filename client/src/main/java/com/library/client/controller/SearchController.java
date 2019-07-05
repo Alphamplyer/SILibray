@@ -14,9 +14,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * Gère les requêtes liées à la recherche sur le site.
+ */
 @Controller
 public class SearchController extends AbstractController {
 
+    /**
+     * Obtien et retourne les résultats de la recherche sur le site
+     * @param search la recherche
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String search(Model model, @RequestParam String search) {
 

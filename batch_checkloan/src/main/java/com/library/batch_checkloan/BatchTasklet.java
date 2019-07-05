@@ -55,6 +55,10 @@ public class BatchTasklet implements Tasklet {
         this.bookService = bookService;
     }
 
+    /**
+     * Récupère tous les prêts actifs (non-archivés), et vérifie si leur date de retour n'a pas été dépassé.
+     * Dans le cas contraire, envoit un message de rappel à l'utilisateur par son email.
+     */
     @Override
     public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
 

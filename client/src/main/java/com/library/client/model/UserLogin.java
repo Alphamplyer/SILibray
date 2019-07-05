@@ -3,6 +3,9 @@ package com.library.client.model;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Diminution de la classe user, uniquement pour la connexion
+ */
 public class UserLogin {
 
     @NotNull

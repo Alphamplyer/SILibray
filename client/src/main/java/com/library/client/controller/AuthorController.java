@@ -11,11 +11,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * Gère tous les requêtes liés au autheur.
+ */
 @Controller
 public class AuthorController extends AbstractController {
 
     // MAPPING /////////////////////////////////////////////////////////////
 
+    /**
+     * Optenir la liste d'auteur suivant la page
+     * @param page (optionel) page à afficher. Valeur par défaut page = 1
+     * @return le nom de la page html associé.
+     */
     @RequestMapping("/authors")
     public String displayAuthors(Model model, @RequestParam(required = false) Integer page) {
 
@@ -38,6 +46,11 @@ public class AuthorController extends AbstractController {
         return "authors";
     }
 
+    /**
+     * Optenir les information d'un auteur par son ID.
+     * @param id ID de l'auteur.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping("/authors/{id}")
     public String displayAuthor (Model model, @PathVariable int id) {
 

@@ -14,15 +14,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+/**
+ * Gère toutes les requêtes liés aux livres.
+ */
 @Controller
 public class BookController extends AbstractController {
 
     // MAPPING /////////////////////////////////////////////////////////////
 
+    /**
+     * Optenir la liste des livre suivant la page
+     * @param page (optionel) page à afficher. Valeur par défaut page = 1
+     * @return le nom de la page html associé.
+     */
     @RequestMapping("/books")
     public String displayBooks(Model model, @RequestParam(required = false) Integer page) {
 
@@ -56,6 +62,11 @@ public class BookController extends AbstractController {
         return "books";
     }
 
+    /**
+     * Optenir les information d'un livre par son ID.
+     * @param id ID du livre.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping("/books/{id}")
     public String displayBook(Model model, @PathVariable int id, HttpSession httpSession) {
 
@@ -116,6 +127,14 @@ public class BookController extends AbstractController {
         return "book";
     }
 
+    /**
+     * Créer un commentaire via l'ID d'un livre.
+     * @param id ID du livre.
+     * @param content Contenu du commentaire.
+     * @param notation_str Notation du livre.
+     * @param session Session utilisateur pour voir s'il est connecté.
+     * @return
+     */
     @RequestMapping(value = "/books/{id}/comment", method = RequestMethod.POST)
     public String createComment(Model model, RedirectAttributes redirectAttributes, @PathVariable(name = "id") int id, @RequestParam("content") String content, @RequestParam("notation") String notation_str, HttpSession session) {
 
@@ -171,6 +190,12 @@ public class BookController extends AbstractController {
 
     // PRIVATE METHODS /////////////////////////////////////////////////////
 
+    /**
+     * Est-ce que l'utilisateur (user_id) a lu le livre (book_id).
+     * @param user_id ID de l'utilisateur.
+     * @param book_id ID du livre.
+     * @return true si le livre a été lu, false sinon.
+     */
     private boolean haveReadBook(int user_id, int book_id) {
         boolean haveReadThisBook = false;
         List<Loan> loans;

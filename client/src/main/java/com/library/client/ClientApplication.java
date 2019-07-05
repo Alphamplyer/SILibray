@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.client.RestTemplate;
 
-@PropertySource(value = "file:${APP_HOME}/client.properties", encoding = "UTF-8")
+@PropertySource(value = "file:${APP_HOME}/client.properties") // On charge le fichier de configuration de l'application dans le dossier externalisé.
 @SpringBootApplication
 public class ClientApplication extends SpringBootServletInitializer {
 

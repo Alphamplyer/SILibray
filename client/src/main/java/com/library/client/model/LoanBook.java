@@ -1,5 +1,8 @@
 package com.library.client.model;
 
+/**
+ * Association pour afficher le prêt et le livre.
+ */
 public class LoanBook {
 
     private Book book;

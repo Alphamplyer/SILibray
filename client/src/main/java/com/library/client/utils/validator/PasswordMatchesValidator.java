@@ -6,6 +6,9 @@ import com.library.client.utils.validator.customAnnotation.PasswordMatches;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
+/**
+ * classe pour valider le mot de passe.
+ */
 public class PasswordMatchesValidator
     implements ConstraintValidator<PasswordMatches, Object> {
 

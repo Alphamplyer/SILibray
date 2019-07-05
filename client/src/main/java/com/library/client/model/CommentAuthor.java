@@ -1,5 +1,8 @@
 package com.library.client.model;
 
+/**
+ * Association pour afficher les commentaires et l'auteur.
+ */
 public class CommentAuthor {
 
     private Comment comment;

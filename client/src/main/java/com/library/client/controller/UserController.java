@@ -21,10 +21,18 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Gère les requêtes liées aux utilisateurs.
+ */
 @Controller
 public class UserController extends AbstractController {
 
 
+    /**
+     * Affiche la page profil avec l'utilisateur fourni.
+     * @param user Utilisateur.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping("/user")
     public ModelAndView displayUserAfterRegistrationOrLogin(@ModelAttribute("user") User user) {
         return new ModelAndView("user", "user", user);
@@ -32,6 +40,12 @@ public class UserController extends AbstractController {
 
     // MAPPING /////////////////////////////////////////////////////////////
 
+    /**
+     * Obtien et Affiche l'utilisateur avec son ID
+     * @param id ID de l'utilisateur
+     * @param session Session utilisateur.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping("/user/{id}")
     public String displayUser(Model model, @PathVariable int id, HttpSession session) {
 
@@ -80,6 +94,10 @@ public class UserController extends AbstractController {
         return "user";
     }
 
+    /**
+     * Affiche la page d'inscription.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
     public String displayRegistrationForm(Model model) {
         UserRegistration userRegistration = new UserRegistration();
@@ -87,6 +105,13 @@ public class UserController extends AbstractController {
         return "signup";
     }
 
+    /**
+     * Inscrit un nouveau menbre
+     * @param userRegistration informations entrées par l'utilisateur.
+     * @param result les résultats de la validation de userRegistration.
+     * @param session Session utilisateur.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
     public ModelAndView register(@ModelAttribute("user") @Valid UserRegistration userRegistration, BindingResult result, HttpSession session) {
 
@@ -124,6 +149,10 @@ public class UserController extends AbstractController {
         }
     }
 
+    /**
+     * Affiche la page de connexion.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
     public String identificationPage(Model model) {
         UserLogin userLogin = new UserLogin();
@@ -131,6 +160,13 @@ public class UserController extends AbstractController {
         return "signin";
     }
 
+    /**
+     * Connecte un utilisateur.
+     * @param userLogin informations entrées par l'utilisateur.
+     * @param result les résultats de la validation de userLogin.
+     * @param session Session utilisateur.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public ModelAndView identification(@ModelAttribute("user") @Valid UserLogin userLogin, BindingResult result, HttpSession session) {
 
@@ -163,6 +199,11 @@ public class UserController extends AbstractController {
         }
     }
 
+    /**
+     * Déconnecte un utilisateur.
+     * @param httpSession Session utilisateur.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/signout")
     public String LoginProcess(Model model, HttpSession httpSession) {
         if (httpSession.getAttribute("user") != null) {

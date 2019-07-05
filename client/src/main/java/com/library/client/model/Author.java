@@ -23,42 +23,82 @@ public class Author {
         this.deathDate = deathDate;
     }
 
+    /**
+     * Retourne l'ID de l'auteur.
+     * @return Id de l'auteur.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Défini l'ID de l'auteur.
+     * @param id l'ID de l'auteur.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Retourne le nom de l'auteur.
+     * @return le nom de l'auteur.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Défini le nom de l'auteur.
+     * @param name le nom de l'auteur.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Retourne la biographie de l'auteur.
+     * @return la biographie de l'auteur.
+     */
     public String getBiography() {
         return biography;
     }
 
+    /**
+     * Défini la biographie de l'auteur.
+     * @param biography la biographie de l'auteur.
+     */
     public void setBiography(String biography) {
         this.biography = biography;
     }
 
+    /**
+     * Retourne la date de naissance de l'auteur.
+     * @return la date de naissance de l'auteur.
+     */
     public Date getBirthDate() {
         return birthDate;
     }
 
+    /**
+     * Défini la date de naissance de l'auteur.
+     * @param birthDate la date de naissance de l'auteur.
+     */
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
+    /**
+     * Retourne la date de mort de l'auteur.
+     * @return la date de mort de l'auteur.
+     */
     public Date getDeathDate() {
         return deathDate;
     }
 
+    /**
+     * Défini la date de mort de l'auteur.
+     * @param deathDate la date de mort de l'auteur.
+     */
     public void setDeathDate(Date deathDate) {
         this.deathDate = deathDate;
     }

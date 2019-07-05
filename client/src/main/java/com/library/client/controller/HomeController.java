@@ -2,10 +2,6 @@ package com.library.client.controller;
 
 import com.library.client.model.Book;
 import com.library.client.model.Loan;
-import com.library.client.services.interf.BookService;
-import com.library.client.services.interf.LoanService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +10,16 @@ import org.springframework.web.client.HttpClientErrorException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Gère la requête liée à la page d'accueil.
+ */
 @Controller
 public class HomeController extends AbstractController {
 
+    /**
+     * Obtien les infos pour afficher la page d'accueil.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping({"/", "/index"})
     public String home (Model model) {
 

@@ -13,8 +13,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 
-@PropertySource("file:${APP_HOME}/batch.properties")
-@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class })
+@PropertySource("file:${APP_HOME}/batch.properties") // On charge le fichier de configuration de l'application dans le dossier externalisé.
+@SpringBootApplication(exclude = { DataSourceAutoConfiguration.class }) // On exclu la configuration de la DataSource.
 @EnableBatchProcessing
 public class BatchCheckloanApplication {
 

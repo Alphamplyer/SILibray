@@ -17,11 +17,20 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * Gère toutes les requêtes en lien avec les prêts de livre.
+ */
 @Controller
 public class LoanController extends AbstractController {
 
     // MAPPING /////////////////////////////////////////////////////////////
 
+    /**
+     * Obtien les information pour afficher les infos d'un prêt
+     * @param loan_id ID du prêt
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/loans/{loan_id}", method = RequestMethod.GET)
     private String displayLoan(Model model, @PathVariable int loan_id, HttpSession session) {
 
@@ -82,6 +91,13 @@ public class LoanController extends AbstractController {
         return "loan";
     }
 
+
+    /**
+     * Obtien les information pour créer un prêt.
+     * @param book_id Id du livre.
+     * @param session Session utilisateur.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/loans/new/{book_id}", method = RequestMethod.GET)
     public String displayLoanBookForm(Model model, @PathVariable int book_id, HttpSession session) {
 
@@ -170,6 +186,12 @@ public class LoanController extends AbstractController {
         return "loan";
     }
 
+    /**
+     * Créer le prêt et redirige vers les information du prêt.
+     * @param book_id Id du livre.
+     * @param session Session utilisateur.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/loans/new/{book_id}", method = RequestMethod.POST)
     public String loanBook(Model model, @PathVariable int book_id, HttpSession session, RedirectAttributes redirectAttributes) {
 
@@ -242,6 +264,13 @@ public class LoanController extends AbstractController {
         return "redirect:/loans/" + loan_id;
     }
 
+
+    /**
+     * Obtien les informations pour étendre un prêt.
+     * @param loan_id ID du prêt.
+     * @param session Session utilisateur.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/loans/extend/{loan_id}", method = RequestMethod.GET)
     private String extendLoanForm(Model model, @PathVariable int loan_id, HttpSession session) {
 
@@ -304,6 +333,13 @@ public class LoanController extends AbstractController {
         return "loan";
     }
 
+
+    /**
+     * Etand et redirige vers les information du prêt.
+     * @param loan_id Id du prêt.
+     * @param session Session utilisateur.
+     * @return le nom de la page html associé.
+     */
     @RequestMapping(value = "/loans/extend/{loan_id}", method = RequestMethod.POST)
     private String extendLoan(Model model, @PathVariable int loan_id, HttpSession session, RedirectAttributes redirectAttributes) {
 

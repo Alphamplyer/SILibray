@@ -53,6 +53,9 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
     @Override
     public void setDataSource(DataSource dataSource) { }
 
+    /**
+     * Repeter la tâche dans la classe BatchTasklet tous les jours à 12H.
+     **/
     @Scheduled(cron = "0 0 12 * * 1-7")
     public void checkLoanOutOfDate () throws Exception {
         JobParameters parameters = new JobParametersBuilder().addLong("currentTime", System.currentTimeMillis()).toJobParameters();
@@ -63,11 +66,18 @@ public class BatchConfiguration extends DefaultBatchConfigurer {
         }
     }
 
+
+    /**
+     * Defini un travail qui lance une étape.
+     */
     @Bean
     public Job job() throws Exception {
         return jobBuilderFactory.get("job").start(step1()).build();
     }
 
+    /**
+     * Defini une étape ou on lance la tâche dans la classe BatchTasklet.
+     */
     @Bean
     protected Step step1() throws Exception {
         return stepBuilderFactory.get("step1").tasklet(batchTasklet).build();

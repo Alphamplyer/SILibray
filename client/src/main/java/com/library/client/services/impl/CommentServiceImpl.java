@@ -1,7 +1,6 @@
 package com.library.client.services.impl;
 
 import com.library.client.model.Comment;
-import com.library.client.model.Loan;
 import com.library.client.services.AbstractService;
 import com.library.client.services.interf.CommentService;
 
