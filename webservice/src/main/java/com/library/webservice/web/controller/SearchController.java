@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller qui à partir d'un requete renvoit des informations issue de recherches
+ */
 @RestController
 public class SearchController {
 
@@ -31,6 +34,11 @@ public class SearchController {
         this.authorDao = authorDao;
     }
 
+    /**
+     * Recherche un chaine de caractère dans les livres
+     * @param thingToSearch la chaine de caractère
+     * @return la liste des livres résultant de la recherche
+     */
     @PostMapping(value= "/Search/Book")
     public ResponseEntity<List<Book>> searchBook (@RequestBody String thingToSearch) {
 
@@ -45,6 +53,11 @@ public class SearchController {
         return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
+    /**
+     * Recherche une chaine de caractère dans les auteurs
+     * @param thingToSearch la chaine de caractère
+     * @return la liste des auteur résultant de la recherche
+     */
     @PostMapping(value= "/Search/Author")
     public ResponseEntity<List<Author>> searchAuthor (@RequestBody String thingToSearch) {
 

@@ -14,6 +14,9 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Controller qui à partir d'un requete renvoit des informations, effectu des actions relative aux commentaires
+ */
 @RestController
 public class CommentController {
 
@@ -24,6 +27,11 @@ public class CommentController {
         this.commentDao = commentDao;
     }
 
+    /**
+     * Retroune la liste de tous les emprunts d'un livre à partir de sa référence
+     * @param book_ref la référence du livre.
+     * @return la liste des commentaire du livre.
+     */
     @GetMapping("/Comments/{book_ref}")
     public ResponseEntity<List<Comment>> getCommentFromBoofRef(@PathVariable(name = "book_ref") String book_ref) {
 
@@ -38,6 +46,11 @@ public class CommentController {
         return new ResponseEntity<>(comments, HttpStatus.OK);
     }
 
+    /**
+     * Créer un nouveau commentaire en base
+     * @param comment commentaire à insérer
+     * @return commentaire inséré
+     */
     @PostMapping("/Comments")
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
 
@@ -54,6 +67,10 @@ public class CommentController {
         return new ResponseEntity<>(created_comment, HttpStatus.CREATED);
     }
 
+    /**
+     * Supprime un commentaire en base
+     * @param id id du commentaire à supprimer
+     */
     @DeleteMapping("/Comments/{comment_id}")
     public ResponseEntity<Void> deleteComment(@PathVariable(name = "comment_id") int id) {
         try {

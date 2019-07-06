@@ -38,58 +38,115 @@ public class Loan {
         this.archived = archived;
     }
 
+    /**
+     * Récupère l'ID du prêt.
+     * @return L'ID du prêt.
+     */
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    /**
+     * Récupère l'ID de l'emprunteur.
+     * @return L'ID de l'emprunteur.
+     */
     public int getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
+    /**
+     * Récupère l'ID du livre emprunté.
+     * @return L'ID du livre emprunté.
+     */
     public int getBookId() {
         return bookId;
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
-    }
-
+    /**
+     * Récupère la date de début du prêt.
+     * @return La date de début du prêt.
+     */
     public Date getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(Date beginDate) {
-        this.beginDate = beginDate;
-    }
-
+    /**
+     * Récupère la date de fin du prêt.
+     * @return La date de fun dy prêt.
+     */
     public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
+    /**
+     * Récupère si oui ou non le prêt est prolongé.
+     * @return le prêt est-il prolongé ?
+     */
     public boolean isExtended() {
         return extended;
     }
 
-    public void setExtended(boolean extended) {
-        this.extended = extended;
-    }
-
+    /**
+     * Récupère si oui ou non le prêt est archivé, s'il a fini d'être traité.
+     * @return Le prêt est-il archivé ?
+     */
     public boolean isArchived() {
         return archived;
     }
 
+
+    /**
+     * Définie l'ID du prêt.
+     * @param id l'ID du prêt.
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Définie l'ID de l'emprunteur.
+     * @param userId l'ID de l'emprunteur.
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * Définie l'ID du livre emprunté.
+     * @param bookId l'ID du livre emprunté.
+     */
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
+    /**
+     * Définie la date de début du prêt.
+     * @param beginDate la date de début du prêt.
+     */
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    /**
+     * Définie la date de fin du prêt.
+     * @param endDate la date de fin du prêt.
+     */
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
+     * Définie si oui ou non le prêt est prolongé.
+     * @param extended le prêt est-il prolongé ?
+     */
+    public void setExtended(boolean extended) {
+        this.extended = extended;
+    }
+
+    /**
+     * Définie si oui ou non le prêt est archivé, s'il a fini d'être traité.
+     * @param archived Le prêt est-il archivé ?
+     */
     public void setArchived(boolean archived) {
         this.archived = archived;
     }

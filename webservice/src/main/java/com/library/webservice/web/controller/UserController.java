@@ -4,7 +4,6 @@ import com.library.webservice.dao.UserDao;
 import com.library.webservice.model.User;
 import com.library.webservice.utils.Password;
 import com.library.webservice.web.exceptions.*;
-import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controller qui à partir d'un requete renvoit des informations, effectu des actions relative aux utilisisateur.
+ */
 @RestController
 public class UserController {
 
@@ -23,6 +25,10 @@ public class UserController {
         this.userDao = userDao;
     }
 
+    /**
+     * Retourne la liste de tous les utilisateurs
+     * @return la liste de tous les utilisateurs
+     */
     @GetMapping(value = "Users")
     public List<User> getUsers() {
         List<User> users = userDao.findAll();
@@ -32,6 +38,11 @@ public class UserController {
         return users;
     }
 
+    /**
+     * Retourne un utilisateur à partir de son ID
+     * @param id id de l'utilisateur
+     * @return l'utilisateur
+     */
     @GetMapping(value = "Users/{id}")
     public Optional<User> getUser(@PathVariable int id) {
         Optional<User> user = userDao.findById(id);
@@ -41,6 +52,11 @@ public class UserController {
         return user;
     }
 
+    /**
+     * Identifie un utilisateur, et retroune ses informations si identifier
+     * @param userToIdentify utilisateur à identifier
+     * @return informations de l'utlisateur si identifier
+     */
     @PostMapping(value = "Users/Identification")
     public ResponseEntity<User> identifyUser(@RequestBody User userToIdentify) {
 
@@ -51,6 +67,11 @@ public class UserController {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
+    /**
+     * Créer un utilisateur en base à partir de ses informations
+     * @param user info utilisateur
+     * @return l'utilisateur créer
+     */
     @PostMapping(value = "Users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
 
@@ -70,6 +91,11 @@ public class UserController {
         return new ResponseEntity<>(userAdded, HttpStatus.CREATED);
     }
 
+    /**
+     * Modifie un utilisateur en base à partir de ses informations
+     * @param user info utilisateur
+     * @return l'utilisateur modifier
+     */
     @PutMapping(value = "Users")
     public ResponseEntity<User> modifyUser(@RequestBody User user) {
 
@@ -90,6 +116,10 @@ public class UserController {
         return new ResponseEntity<>(userModified, HttpStatus.OK);
     }
 
+    /**
+     * Suprime un utilisateur en base à partir de son id
+     * @param id id utilisateur
+     */
     @DeleteMapping(value = "Users/{id}")
     public void deleteUser(@PathVariable int id) {
         try {

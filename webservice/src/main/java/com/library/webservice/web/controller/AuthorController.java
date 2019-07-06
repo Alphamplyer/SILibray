@@ -13,6 +13,9 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controller qui à partir d'un requete renvoit des informations, effectu des actions relative aux auteurs.
+ */
 @RestController
 public class AuthorController {
 
@@ -23,6 +26,10 @@ public class AuthorController {
         this.authorDao = authorDao;
     }
 
+    /**
+     * Renvoit la liste des auteurs.
+     * @return la liste des auteurs.
+     */
     @GetMapping(value = "/Authors")
     public List<Author> getAuthors() {
         List<Author> authors = authorDao.findAll();
@@ -32,6 +39,11 @@ public class AuthorController {
         return authors;
     }
 
+    /**
+     * Obtient et renvoit suite à la requête l'auteur à l'ID donné
+     * @param id l'id de l'auteur
+     * @return l'auteur
+     */
     @GetMapping(value = "/Authors/{id}")
     public Optional<Author> getAuthor(@PathVariable int id) {
         Optional<Author> author = authorDao.findById(id);
@@ -41,6 +53,11 @@ public class AuthorController {
         return author;
     }
 
+    /**
+     * Enregistre un auteur dans la base de données
+     * @param author l'auteur à insérer
+     * @return l'auteur inséré avec le code HTTP
+     */
     @PostMapping(value = "/Authors")
     public ResponseEntity<Author> createAuthor(@RequestBody Author author) {
         Author authorAdded = null;
@@ -57,6 +74,11 @@ public class AuthorController {
         return new ResponseEntity<>(authorAdded, HttpStatus.CREATED);
     }
 
+    /**
+     * modification d'un auteur
+     * @param author auteur à modifier avec les nouvelle information
+     * @return l'auteur modifier et le code HTTP
+     */
     @PutMapping(value = "/Authors")
     public ResponseEntity<Author> modifyAuthor(@RequestBody Author author) {
         Optional<Author> authorToUpdate = authorDao.findById(author.getId());
@@ -70,6 +92,10 @@ public class AuthorController {
         return new ResponseEntity<>(authorModified, HttpStatus.OK);
     }
 
+    /**
+     * Suprime un auteur de la base de données par son ID
+     * @param id Id de l'auteur
+     */
     @DeleteMapping(value = "/Authors/{id}")
     public void deleteAuthor(@PathVariable int id) {
         try {

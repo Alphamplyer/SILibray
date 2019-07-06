@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Controller qui à partir d'un requete renvoit des informations, effectu des actions relative aux emprunts.
+ */
 @RestController
 public class LoanController {
 
@@ -25,6 +28,10 @@ public class LoanController {
         this.loanDao = loanDao;
     }
 
+    /**
+     * Retourne la liste de tous les emprunts
+     * @return la liste de tous les emprunts
+     */
     @GetMapping(value = "/Loans")
     public List<Loan> getLoans() {
         List<Loan> loans = loanDao.findAll(Sort.by("beginDate").descending());
@@ -34,6 +41,10 @@ public class LoanController {
         return loans;
     }
 
+    /**
+     * Retourne la liste de tous les emprunts actif
+     * @return la liste de tous les emprunts actif
+     */
     @GetMapping(value = "/Loans/active")
     public List<Loan> getActiveLoans() {
         List<Loan> loans = loanDao.findAllByArchivedFalse();
@@ -43,6 +54,11 @@ public class LoanController {
         return loans;
     }
 
+    /**
+     * Retourne un emrpunt à partir de son ID
+     * @param id id de l'emrpunt
+     * @return l'emrpunt
+     */
     @GetMapping(value = "/Loans/{id}")
     public Optional<Loan> getLoan(@PathVariable int id) {
         Optional<Loan> loan = loanDao.findById(id);
@@ -52,11 +68,21 @@ public class LoanController {
         return loan;
     }
 
+    /**
+     * Retourne la liste des emrpunts d'un utilisateur à partir de son ID
+     * @param id id de l'utilisateur
+     * @return les emprunt de l'utilisateur
+     */
     @GetMapping(value = "/Loans/user/{id}")
     public List<Loan> getUserLoan(@PathVariable int id) {
         return loanDao.findLoansByUserId(id);
     }
 
+    /**
+     * Insert un emprunt
+     * @param loan emprunt à insérer et ses information
+     * @return l'emprunt inséré
+     */
     @PostMapping(value = "/Loans")
     public ResponseEntity<Loan> createLoan(@RequestBody Loan loan) {
 
@@ -74,6 +100,11 @@ public class LoanController {
         return new ResponseEntity<>(loanAdded, HttpStatus.CREATED);
     }
 
+    /**
+     * Modifi un emprunt
+     * @param loan emprunt à modifier et ses nouvelles information
+     * @return l'emprunt modifié
+     */
     @PutMapping(value = "/Loans")
     public ResponseEntity<Loan> modifyLoan(@RequestBody Loan loan) {
 
@@ -88,6 +119,10 @@ public class LoanController {
         return new ResponseEntity<>(loanModified, HttpStatus.OK);
     }
 
+    /**
+     * Archive un emprunt
+     * @param id id le l'emprunt
+     */
     @PutMapping(value = "/Loans/{id}")
     public ResponseEntity<Void> archiveLoan(@PathVariable int id) {
         Optional<Loan> loanToUpdate = loanDao.findById(id);
