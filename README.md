@@ -120,3 +120,7 @@ Par :
   <packaging>jar</packaging>
 
 Ce fichier peut-être lancé directement et ne nécésite pas de serveur.
+
+## Quelques images
+
+Quelques images [ici](https://imgur.com/a/2Jz3FO8)
